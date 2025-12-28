@@ -21,7 +21,7 @@ Claudeは毎ターン開始時にこのファイルを読み込むこと。
 | UIManager.cs        | 未着手 |      |
 | PaddleController.cs | 完了 |      |
 | BallController.cs   | 完了 |      |
-| BlockController.cs  | 未着手 |      |
+| BlockController.cs  | 完了   |      |
 | DeadZone.cs         | 未着手 |      |
 
 ### Unity Editor作業状況（人間担当）
@@ -34,7 +34,7 @@ Claudeは毎ターン開始時にこのファイルを読み込むこと。
 | 壁オブジェクト | 完了 |      |
 | パドル         | 完了 |      |
 | ボール         | 完了 |      |
-| ブロック配置   | 未着手 |      |
+| ブロック配置   | 完了 |      |
 | UI構築         | 未着手 |      |
 
 ### メモ・課題

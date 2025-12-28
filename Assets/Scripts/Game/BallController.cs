@@ -142,17 +142,9 @@ public class BallController : MonoBehaviour
 
   private void OnCollisionEnter(Collision collision)
   {
-    Debug.Log($"=== 衝突検出 ===");
     Debug.Log($"衝突相手: {collision.gameObject.name}");
-    Debug.Log($"衝突後の速度: {rb.linearVelocity}, Y={rb.linearVelocity.y:F2}");
-    Debug.Log($"衝突点の法線: {collision.contacts[0].normal}");
-
     var otherCollider = collision.collider;
-    if (otherCollider.sharedMaterial != null)
-    {
-      Debug.Log($"相手の物理マテリアル: {otherCollider.sharedMaterial.name}, Bounciness={otherCollider.sharedMaterial.bounciness}");
-    }
-    else
+    if (otherCollider.sharedMaterial == null)
     {
       Debug.LogWarning("相手に物理マテリアルがありません！デフォルト(Bounciness=0)が使用されます");
     }
