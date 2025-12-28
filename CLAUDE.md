@@ -25,7 +25,7 @@ Claudeは毎ターン開始時にこのファイルを読み込むこと。
 ### Unity Editor作業状況（人間担当）
 | 作業 | 状態 | 備考 |
 |------|------|------|
-| シーン作成 | 未着手 | |
+| シーン作成 | 完了 | |
 | カメラ設定 | 未着手 | |
 | 物理マテリアル | 未着手 | |
 | 壁オブジェクト | 未着手 | |
@@ -92,7 +92,7 @@ Assets/Materials/
 
 ### Phase 2: シーン準備
 **[人間]**
-1. `File` → `New Scene` → `Basic (Built-in)` → `Create`
+1. `File` → `New Scene` → `Basic (URP)` → `Create`
 2. `File` → `Save As...` → `Assets/Scenes/GameScene.unity`
 
 ---
