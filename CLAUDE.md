@@ -10,31 +10,35 @@ Claudeは毎ターン開始時にこのファイルを読み込むこと。
 ## 進捗状況
 
 ### 現在のフェーズ
+
 **Phase 2: シーン準備** ← 人間の作業待ち
 
 ### スクリプト作成状況（Claude担当）
-| ファイル | 状態 | 備考 |
-|----------|------|------|
-| GameManager.cs | 未着手 | |
-| UIManager.cs | 未着手 | |
-| PaddleController.cs | 未着手 | |
-| BallController.cs | 未着手 | |
-| BlockController.cs | 未着手 | |
-| DeadZone.cs | 未着手 | |
+
+| ファイル            | 状態   | 備考 |
+| ------------------- | ------ | ---- |
+| GameManager.cs      | 未着手 |      |
+| UIManager.cs        | 未着手 |      |
+| PaddleController.cs | 未着手 |      |
+| BallController.cs   | 未着手 |      |
+| BlockController.cs  | 未着手 |      |
+| DeadZone.cs         | 未着手 |      |
 
 ### Unity Editor作業状況（人間担当）
-| 作業 | 状態 | 備考 |
-|------|------|------|
-| シーン作成 | 完了 | |
-| カメラ設定 | 未着手 | |
-| 物理マテリアル | 未着手 | |
-| 壁オブジェクト | 未着手 | |
-| パドル | 未着手 | |
-| ボール | 未着手 | |
-| ブロック配置 | 未着手 | |
-| UI構築 | 未着手 | |
+
+| 作業           | 状態   | 備考 |
+| -------------- | ------ | ---- |
+| シーン作成     | 完了   |      |
+| カメラ設定     | 完了   |      |
+| 物理マテリアル | 完了   |      |
+| 壁オブジェクト | 未着手 |      |
+| パドル         | 未着手 |      |
+| ボール         | 未着手 |      |
+| ブロック配置   | 未着手 |      |
+| UI構築         | 未着手 |      |
 
 ### メモ・課題
+
 （作業中に気づいたこと、変更点、問題点をここに記録）
 
 ---
@@ -48,6 +52,7 @@ Claudeは毎ターン開始時にこのファイルを読み込むこと。
 - **プラットフォーム**: iPhone/Android 縦画面
 
 ### 画面構成（単一シーン方式）
+
 1. スタート画面 - タイトル + 「プレイ」ボタン
 2. ゲーム画面 - スコア + ライフ + メニューボタン（右上≡）
 3. ポーズ画面 - 「再開する」「やめる」（Esc/≡で開く）
@@ -59,11 +64,13 @@ Claudeは毎ターン開始時にこのファイルを読み込むこと。
 ## 役割分担
 
 ### Claude
+
 - C#スクリプト作成・編集
 - フォルダ作成
 - コード修正・デバッグ支援
 
 ### 人間（Unity Editor）
+
 - シーン作成・保存
 - 3D/UIオブジェクト作成・配置
 - コンポーネント追加・設定
@@ -75,30 +82,38 @@ Claudeは毎ターン開始時にこのファイルを読み込むこと。
 
 ## 実装フェーズ
 
-> **注意**: 以下の数値（Position, Scale等）は目安。実際に動かしながら調整してOK。
+> **注意**: 以下の数値（Position,
+> Scale等）は目安。実際に動かしながら調整してOK。
 > オブジェクト名も多少違っても問題なし（スクリプトとの紐付けはInspectorで行う）。
 
 ### Phase 1: フォルダ構造作成
+
 **[Claude]** 以下のフォルダを作成:
+
 ```
 Assets/Scripts/Managers/
 Assets/Scripts/Game/
 Assets/Prefabs/
 Assets/Materials/
 ```
+
 **[人間]** Unity Editorで表示確認
 
 ---
 
 ### Phase 2: シーン準備
+
 **[人間]**
+
 1. `File` → `New Scene` → `Basic (URP)` → `Create`
 2. `File` → `Save As...` → `Assets/Scenes/GameScene.unity`
 
 ---
 
 ### Phase 3: カメラ設定
+
 **[人間]** Main Camera:
+
 - Position: (0, 0, -15) 程度
 - Projection: Perspective
 - FOV: 60
@@ -106,7 +121,9 @@ Assets/Materials/
 ---
 
 ### Phase 4: 物理マテリアル
+
 **[人間]** `Assets/Materials`に`Physic Material`を作成:
+
 - Bounciness: 1
 - Friction: 0
 - Bounce Combine: Maximum
@@ -114,11 +131,14 @@ Assets/Materials/
 ---
 
 ### Phase 5: 壁の作成
+
 **[人間]** Cubeで4つの壁を作成:
+
 - TopWall, LeftWall, RightWall: 通常のCollider
 - DeadZone（下）: Is Trigger = true、MeshRenderer無効
 
 目安サイズ:
+
 - 上: Y=8, Scale(10,1,1)
 - 左右: X=±5, Scale(1,16,1)
 - 下: Y=-9, Scale(10,1,1)
@@ -126,7 +146,9 @@ Assets/Materials/
 ---
 
 ### Phase 6: パドル
+
 **[人間]**
+
 1. Cube作成、名前を`Paddle`
 2. Position: (0, -7, 0)、Scale: (2, 0.5, 0.5) 程度
 3. Rigidbody追加: Use Gravity=OFF, Is Kinematic=ON
@@ -136,7 +158,9 @@ Assets/Materials/
 ---
 
 ### Phase 7: ボール
+
 **[人間]**
+
 1. Sphere作成、名前を`Ball`
 2. Position: (0, -6, 0)、Scale: (0.5, 0.5, 0.5)
 3. Rigidbody: Use Gravity=OFF, Collision Detection=Continuous
@@ -148,7 +172,9 @@ Assets/Materials/
 ---
 
 ### Phase 8: ブロック
+
 **[人間]**
+
 1. 親オブジェクト`Blocks`(Empty)作成
 2. 子にCube作成、Scale: (1.5, 0.5, 0.5)程度
 3. **[Claude]** BlockController.cs作成後アタッチ
@@ -158,19 +184,22 @@ Assets/Materials/
 ---
 
 ### Phase 9-10: マネージャー系
-**[人間]** 空オブジェクト`GameManager`作成
-**[Claude]** GameManager.cs、DeadZone.cs作成
-**[人間]** それぞれアタッチ
+
+**[人間]** 空オブジェクト`GameManager`作成 **[Claude]**
+GameManager.cs、DeadZone.cs作成 **[人間]** それぞれアタッチ
 
 ---
 
 ### Phase 11: UI
+
 **[人間]** Canvas作成:
+
 - Canvas Scaler: Scale With Screen Size
 - Reference: 1080×1920
 - Match: 0.5
 
 各パネル（詳細は別途相談しながら）:
+
 - StartPanel: タイトル、プレイボタン
 - GamePanel: スコア、ライフ、メニューボタン
 - PausePanel: 半透明背景、再開/やめるボタン
@@ -180,13 +209,16 @@ Assets/Materials/
 ---
 
 ### Phase 12: UIManager
-**[Claude]** UIManager.cs作成
-**[人間]** Canvasにアタッチ、Inspector上で各UI要素を紐付け
+
+**[Claude]** UIManager.cs作成 **[人間]**
+Canvasにアタッチ、Inspector上で各UI要素を紐付け
 
 ---
 
 ### Phase 13: ビルド設定
+
 **[人間]** Project Settings → Player:
+
 - Default Orientation: Portrait
 
 ---
@@ -216,6 +248,7 @@ GameScene
 ---
 
 ## 変更履歴
-| 日付 | 内容 |
-|------|------|
+
+| 日付       | 内容     |
+| ---------- | -------- |
 | 2024-12-29 | 初版作成 |
