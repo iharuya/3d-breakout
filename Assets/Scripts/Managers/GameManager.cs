@@ -68,23 +68,6 @@ public class GameManager : MonoBehaviour
     SetState(GameState.Title);
   }
 
-  private void Update()
-  {
-    // Escキーでポーズ切り替え
-    if (UnityEngine.InputSystem.Keyboard.current != null &&
-        UnityEngine.InputSystem.Keyboard.current.escapeKey.wasPressedThisFrame)
-    {
-      if (currentState == GameState.Playing)
-      {
-        Pause();
-      }
-      else if (currentState == GameState.Paused)
-      {
-        Resume();
-      }
-    }
-  }
-
   /// <summary>
   /// ゲーム状態を変更
   /// </summary>
@@ -110,20 +93,27 @@ public class GameManager : MonoBehaviour
   }
 
   /// <summary>
-  /// ゲーム開始（タイトルからプレイへ）
+  /// ゲーム状態を初期化してPlaying状態へ
   /// </summary>
-  public void StartGame()
+  private void InitializeGame()
   {
     score = 0;
     lives = initialLives;
     OnScoreChanged?.Invoke(score);
     OnLivesChanged?.Invoke(lives);
 
-    // ブロック数をカウント（BlockSpawnerの子オブジェクト数）
     totalBlocks = blockSpawner.transform.childCount;
     ball.ResetBall();
 
     SetState(GameState.Playing);
+  }
+
+  /// <summary>
+  /// ゲーム開始（タイトルからプレイへ）
+  /// </summary>
+  public void StartGame()
+  {
+    InitializeGame();
   }
 
   /// <summary>
@@ -160,24 +150,24 @@ public class GameManager : MonoBehaviour
   }
 
   /// <summary>
-  /// リトライ
+  /// リトライ（ホームに戻らずゲーム初期状態から再開）
   /// </summary>
   public void Retry()
   {
-    GoToTitle();
+    blockSpawner.ResetBlocks();
+    InitializeGame();
   }
 
   /// <summary>
   /// スコア加算（ブロック破壊時に呼ばれる）
   /// </summary>
-  public void AddScore(int points = 1)
+  public void OnBreak()
   {
-    score += points;
+    score += 1;
+    totalBlocks--;
     OnScoreChanged?.Invoke(score);
-    Debug.Log($"スコア: {score}");
 
-    // 全ブロック破壊でクリア
-    if (blockSpawner.transform.childCount == 0)
+    if (totalBlocks <= 0)
     {
       SetState(GameState.Cleared);
     }

@@ -13,7 +13,7 @@ public class BlockController : MonoBehaviour
     {
       if (GameManager.Instance != null)
       {
-        GameManager.Instance.AddScore(1);
+        GameManager.Instance.OnBreak();
       }
 
       Debug.Log($"ブロック破壊: {gameObject.name}");

@@ -11,14 +11,14 @@ Claudeは毎ターン開始時にこのファイルを読み込むこと。
 
 ### 現在のフェーズ
 
-**Phase 12: UIManager作成**
+**Phase 12: UIManager作成** ← スクリプト完了、Inspectorで紐付け待ち
 
 ### スクリプト作成状況（Claude担当）
 
 | ファイル            | 状態   | 備考 |
 | ------------------- | ------ | ---- |
 | GameManager.cs      | 完了   |      |
-| UIManager.cs        | 未着手 |      |
+| UIManager.cs        | 完了   | Inspectorで紐付け必要 |
 | PaddleController.cs | 完了   |      |
 | BallController.cs   | 完了   |      |
 | BlockController.cs  | 完了   |      |
@@ -270,3 +270,4 @@ GameScene
 | ---------- | ---------------------------------------------- |
 | 2024-12-29 | 初版作成                                       |
 | 2024-12-30 | Phase 11完了、UI構成確定、PausePanel→Menu Panel |
+| 2024-12-30 | UIManager.cs作成完了                           |

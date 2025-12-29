@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 /// <summary>
@@ -23,7 +24,11 @@ public class PaddleController : MonoBehaviour
 
   private void Update()
   {
-    // TODO: GameManagerでPlaying状態かどうかをチェック（後で実装）
+    // Playing状態でなければ何もしない
+    if (GameManager.Instance == null || GameManager.Instance.CurrentState != GameState.Playing)
+    {
+      return;
+    }
 
     HandleInput();
     Move();
@@ -49,8 +54,11 @@ public class PaddleController : MonoBehaviour
       }
     }
 
+    // UIの上にポインタがある場合はタッチ/マウス入力を無視
+    bool isPointerOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+
     // タッチ入力
-    if (moveDirection == 0f && Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
+    if (!isPointerOverUI && moveDirection == 0f && Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
     {
       Vector2 touchPosition = Touchscreen.current.primaryTouch.position.ReadValue();
       float screenHalfWidth = Screen.width / 2f;
@@ -66,7 +74,7 @@ public class PaddleController : MonoBehaviour
     }
 
     // マウス入力
-    if (moveDirection == 0f && Mouse.current != null && Mouse.current.leftButton.isPressed)
+    if (!isPointerOverUI && moveDirection == 0f && Mouse.current != null && Mouse.current.leftButton.isPressed)
     {
       Vector2 mousePosition = Mouse.current.position.ReadValue();
       float screenHalfWidth = Screen.width / 2f;

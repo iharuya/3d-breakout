@@ -49,4 +49,17 @@ public class BlockSpawner : MonoBehaviour
       }
     }
   }
+
+  /// <summary>
+  /// ブロックをリセット（全削除→再生成）
+  /// </summary>
+  public void ResetBlocks()
+  {
+    foreach (Transform child in transform)
+    {
+      Destroy(child.gameObject);
+    }
+
+    SpawnBlocks();
+  }
 }

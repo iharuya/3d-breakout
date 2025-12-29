@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -33,7 +34,11 @@ public class BallController : MonoBehaviour
 
   private void Update()
   {
-    // TODO: GameManagerでPlaying状態かどうかをチェック（後で実装）
+    // Playing状態でなければ何もしない
+    if (GameManager.Instance == null || GameManager.Instance.CurrentState != GameState.Playing)
+    {
+      return;
+    }
 
     if (!isLaunched)
     {
@@ -59,6 +64,12 @@ public class BallController : MonoBehaviour
   /// </summary>
   private bool ShouldLaunch()
   {
+    // UIの上にポインタがある場合は発射しない
+    if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+    {
+      return false;
+    }
+
     // スペースキー
     if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
     {
@@ -135,8 +146,13 @@ public class BallController : MonoBehaviour
   public void ResetBall()
   {
     isLaunched = false;
-    rb.linearVelocity = Vector3.zero;
+
+    if (!rb.isKinematic)
+    {
+      rb.linearVelocity = Vector3.zero;
+    }
     rb.isKinematic = true;
+
     FollowPaddle();
   }
 
