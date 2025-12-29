@@ -11,18 +11,19 @@ Claudeは毎ターン開始時にこのファイルを読み込むこと。
 
 ### 現在のフェーズ
 
-**Phase 8: ブロック作成**
+**Phase 11: UI構築**
 
 ### スクリプト作成状況（Claude担当）
 
 | ファイル            | 状態   | 備考 |
 | ------------------- | ------ | ---- |
-| GameManager.cs      | 未着手 |      |
+| GameManager.cs      | 完了   |      |
 | UIManager.cs        | 未着手 |      |
-| PaddleController.cs | 完了 |      |
-| BallController.cs   | 完了 |      |
+| PaddleController.cs | 完了   |      |
+| BallController.cs   | 完了   |      |
 | BlockController.cs  | 完了   |      |
-| DeadZone.cs         | 未着手 |      |
+| BlockSpawner.cs     | 完了   |      |
+| DeadZone.cs         | 完了   |      |
 
 ### Unity Editor作業状況（人間担当）
 
@@ -181,7 +182,7 @@ Assets/Materials/
 2. 子にCube作成、Scale: (1.5, 0.5, 0.5)程度
 3. **[Claude]** BlockController.cs作成後アタッチ
 4. Prefab化（Assets/Prefabsへドラッグ）
-5. 複製して配置（目安: 5列×4行=20個）
+5. BlockSpawner.cs作成後 → **[人間]** 空オブジェクト`BlockSpawner`作成、アタッチ&値調整
 
 ---
 

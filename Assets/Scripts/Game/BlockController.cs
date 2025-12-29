@@ -11,7 +11,10 @@ public class BlockController : MonoBehaviour
     // ボールとの衝突かチェック（Ballタグで判定）
     if (collision.gameObject.CompareTag("Ball"))
     {
-      // TODO: GameManagerにスコア加算を通知（後で実装）
+      if (GameManager.Instance != null)
+      {
+        GameManager.Instance.AddScore(1);
+      }
 
       Debug.Log($"ブロック破壊: {gameObject.name}");
 

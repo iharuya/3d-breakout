@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -24,6 +25,8 @@ public class BallController : MonoBehaviour
 
   private void Start()
   {
+    Assert.IsNotNull(paddle, "Paddle が設定されていません");
+
     rb = GetComponent<Rigidbody>();
     ResetBall();
   }
@@ -82,10 +85,7 @@ public class BallController : MonoBehaviour
   /// </summary>
   private void FollowPaddle()
   {
-    if (paddle != null)
-    {
-      transform.position = paddle.position + paddleOffset;
-    }
+    transform.position = paddle.position + paddleOffset;
   }
 
   /// <summary>

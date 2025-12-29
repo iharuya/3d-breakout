@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /// <summary>
 /// ブロックをグリッド状に自動生成する
@@ -28,6 +29,8 @@ public class BlockSpawner : MonoBehaviour
 
   private void Start()
   {
+    Assert.IsNotNull(blockPrefab, "Block Prefab が設定されていません");
+
     SpawnBlocks();
   }
 
