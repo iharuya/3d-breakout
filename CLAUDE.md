@@ -11,7 +11,7 @@ Claudeは毎ターン開始時にこのファイルを読み込むこと。
 
 ### 現在のフェーズ
 
-**Phase 11: UI構築**
+**Phase 12: UIManager作成**
 
 ### スクリプト作成状況（Claude担当）
 
@@ -36,7 +36,7 @@ Claudeは毎ターン開始時にこのファイルを読み込むこと。
 | パドル         | 完了 |      |
 | ボール         | 完了 |      |
 | ブロック配置   | 完了 |      |
-| UI構築         | 未着手 |      |
+| UI構築         | 完了 |      |
 
 ### メモ・課題
 
@@ -56,11 +56,11 @@ Claudeは毎ターン開始時にこのファイルを読み込むこと。
 
 ### 画面構成（単一シーン方式）
 
-1. スタート画面 - タイトル + 「プレイ」ボタン
-2. ゲーム画面 - スコア + ライフ + メニューボタン（右上≡）
-3. ポーズ画面 - 「再開する」「やめる」（Esc/≡で開く）
-4. クリア画面 - 「ホーム」「もう一度」
-5. ゲームオーバー画面 - 「ホーム」「もう一度」
+1. **Start Panel** - タイトル + Start Button
+2. **Game Panel** - ScoreText + LivesText + MenuButton
+3. **Menu Panel** - Resume Button + Start Over Button + Return Home Button
+4. **Clear Panel** - Clear Text + Return Home Button + Restart Button
+5. **Gameover Panel** - Gameover Text + Return Home Button + Restart Button
 
 ---
 
@@ -193,21 +193,22 @@ GameManager.cs、DeadZone.cs作成 **[人間]** それぞれアタッチ
 
 ---
 
-### Phase 11: UI
+### Phase 11: UI ✅完了
 
 **[人間]** Canvas作成:
 
+- Render Mode: Screen Space - Overlay
 - Canvas Scaler: Scale With Screen Size
 - Reference: 1080×1920
 - Match: 0.5
 
-各パネル（詳細は別途相談しながら）:
+各パネル:
 
-- StartPanel: タイトル、プレイボタン
-- GamePanel: スコア、ライフ、メニューボタン
-- PausePanel: 半透明背景、再開/やめるボタン
-- ClearPanel: クリアテキスト、ホーム/リトライボタン
-- GameOverPanel: 同上
+- **Start Panel**: タイトル、Start Button
+- **Game Panel**: ScoreText、LivesText、MenuButton
+- **Menu Panel**: Resume Button、Start Over Button、Return Home Button
+- **Clear Panel**: Clear Text、Return Home Button、Restart Button
+- **Gameover Panel**: Gameover Text、Return Home Button、Restart Button
 
 ---
 
@@ -238,20 +239,34 @@ GameScene
 │   └── DeadZone
 ├── Paddle
 ├── Ball
-├── Blocks
-│   └── Block × 20個程度
+├── Blocks (BlockSpawner.cs)
+│   └── Block × 20個（自動生成）
 └── Canvas
-    ├── StartPanel
-    ├── GamePanel
-    ├── PausePanel
-    ├── ClearPanel
-    └── GameOverPanel
+    ├── Start Panel
+    │   └── Start Button
+    ├── Game Panel
+    │   ├── ScoreText
+    │   ├── LivesText
+    │   └── MenuButton
+    ├── Menu Panel
+    │   ├── Resume Button
+    │   ├── Start Over Button
+    │   └── Return Home Button
+    ├── Clear Panel
+    │   ├── Clear Text
+    │   ├── Return Home Button
+    │   └── Restart Button
+    └── Gameover Panel
+        ├── Gameover Text
+        ├── Return Home Button
+        └── Restart Button
 ```
 
 ---
 
 ## 変更履歴
 
-| 日付       | 内容     |
-| ---------- | -------- |
-| 2024-12-29 | 初版作成 |
+| 日付       | 内容                                           |
+| ---------- | ---------------------------------------------- |
+| 2024-12-29 | 初版作成                                       |
+| 2024-12-30 | Phase 11完了、UI構成確定、PausePanel→Menu Panel |
