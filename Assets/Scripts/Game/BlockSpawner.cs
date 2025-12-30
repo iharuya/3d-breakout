@@ -27,6 +27,8 @@ public class BlockSpawner : MonoBehaviour
   [Tooltip("左上のブロックの位置")]
   [SerializeField] private Vector3 startPosition = new(-3.4f, 6f, 0f);
 
+  public int TotalBlockCount => columns * rows;
+
   private void Start()
   {
     Assert.IsNotNull(blockPrefab, "Block Prefab が設定されていません");

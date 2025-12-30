@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
     OnScoreChanged?.Invoke(score);
     OnLivesChanged?.Invoke(lives);
 
-    totalBlocks = blockSpawner.transform.childCount;
+    totalBlocks = blockSpawner.TotalBlockCount;
     ball.ResetBall();
 
     SetState(GameState.Playing);
