@@ -568,7 +568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e045484863a12ee0aa19e3ee7146a3d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BallController
-  speed: 14
+  speed: 8
   paddle: {fileID: 1083460031}
   paddleOffset: {x: 0, y: 1, z: 0}
 --- !u!1 &203844586
@@ -874,7 +874,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 1de129710408bee7098caa3e878bd751, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2367,6 +2367,7 @@ GameObject:
   - component: {fileID: 961739752}
   - component: {fileID: 961739751}
   - component: {fileID: 961739750}
+  - component: {fileID: 961739754}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2492,6 +2493,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -2, y: 0, z: 0}
+--- !u!114 &961739754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961739749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd98c56e4eed1e26b1b0fe581079e35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  rotationSpeed: 10
+  pivotPoint: {x: 0, y: 0, z: 0}
+  rotationAxis: {x: 0, y: 1, z: 0}
 --- !u!1 &1004527735
 GameObject:
   m_ObjectHideFlags: 0
@@ -2709,7 +2725,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 1de129710408bee7098caa3e878bd751, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2751,7 +2767,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 8, z: 0}
-  m_LocalScale: {x: 10, y: 0.5, z: 1}
+  m_LocalScale: {x: 9.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 833101575}
@@ -2802,7 +2818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockSpawner
   blockPrefab: {fileID: 2097200772378568384, guid: b9488b51f48b89419b128abffdc69c89, type: 3}
   columns: 5
-  rows: 1
+  rows: 5
   spacingX: 1.7
   spacingY: 0.7
   startPosition: {x: -3.4, y: 14, z: 0}
@@ -4996,7 +5012,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 1de129710408bee7098caa3e878bd751, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5409,6 +5425,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 961739753}
   - {fileID: 203844589}
+  - {fileID: 264616409}
   - {fileID: 833101575}
   - {fileID: 1083460031}
   - {fileID: 185564686}
@@ -5417,4 +5434,3 @@ SceneRoots:
   - {fileID: 1596875151}
   - {fileID: 1527264358}
   - {fileID: 413492160}
-  - {fileID: 264616409}
