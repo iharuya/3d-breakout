@@ -111,6 +111,8 @@ public class BallController : MonoBehaviour
     float randomX = Random.Range(0, 2) == 0 ? -1f : 1f;
     Vector3 direction = new Vector3(randomX, 1f, 0f).normalized;
     rb.linearVelocity = direction * speed;
+
+    AudioManager.Instance.PlayLaunchSE();
   }
 
   /// <summary>
@@ -158,11 +160,10 @@ public class BallController : MonoBehaviour
 
   private void OnCollisionEnter(Collision collision)
   {
-    Debug.Log($"衝突相手: {collision.gameObject.name}");
-    var otherCollider = collision.collider;
-    if (otherCollider.sharedMaterial == null)
+    // ブロック以外との衝突で反射SE（ブロックは破壊SEが鳴る）
+    if (!collision.gameObject.CompareTag("Block"))
     {
-      Debug.LogWarning("相手に物理マテリアルがありません！デフォルト(Bounciness=0)が使用されます");
+      AudioManager.Instance.PlayBounceSE();
     }
   }
 }

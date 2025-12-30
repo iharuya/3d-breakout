@@ -16,7 +16,7 @@ public class DeadZone : MonoBehaviour
     // ボールかチェック
     if (other.CompareTag("Ball"))
     {
-      Debug.Log("ボール落下！");
+      AudioManager.Instance.PlayLoseSE();
       GameManager.Instance.LoseLife();
     }
   }

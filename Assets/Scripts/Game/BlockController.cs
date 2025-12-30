@@ -11,12 +11,12 @@ public class BlockController : MonoBehaviour
     // ボールとの衝突かチェック（Ballタグで判定）
     if (collision.gameObject.CompareTag("Ball"))
     {
+      AudioManager.Instance.PlayBreakSE();
+
       if (GameManager.Instance != null)
       {
         GameManager.Instance.OnBreak();
       }
-
-      Debug.Log($"ブロック破壊: {gameObject.name}");
 
       Destroy(gameObject);
     }

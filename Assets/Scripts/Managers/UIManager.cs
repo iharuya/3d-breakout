@@ -123,31 +123,37 @@ public class UIManager : MonoBehaviour
 
   public void OnStartButtonClicked()
   {
+    AudioManager.Instance.PlayButtonSE();
     GameManager.Instance.StartGame();
   }
 
   public void OnMenuButtonClicked()
   {
+    AudioManager.Instance.PlayButtonSE();
     GameManager.Instance.Pause();
   }
 
   public void OnResumeButtonClicked()
   {
+    AudioManager.Instance.PlayButtonSE();
     GameManager.Instance.Resume();
   }
 
   public void OnStartOverButtonClicked()
   {
+    AudioManager.Instance.PlayButtonSE();
     GameManager.Instance.Retry();
   }
 
   public void OnReturnHomeButtonClicked()
   {
+    AudioManager.Instance.PlayButtonSE();
     GameManager.Instance.GoToTitle();
   }
 
   public void OnRestartButtonClicked()
   {
+    AudioManager.Instance.PlayButtonSE();
     GameManager.Instance.Retry();
   }
 }
