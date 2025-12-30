@@ -18,6 +18,7 @@ public class CameraController : MonoBehaviour
 
   private Vector3 initialPosition;
   private Quaternion initialRotation;
+  private GameState previousState;
 
   private void Start()
   {
@@ -25,6 +26,7 @@ public class CameraController : MonoBehaviour
 
     initialPosition = transform.position;
     initialRotation = transform.rotation;
+    previousState = GameManager.Instance.CurrentState;
 
     GameManager.Instance.OnGameStateChanged += HandleGameStateChanged;
   }
@@ -39,10 +41,14 @@ public class CameraController : MonoBehaviour
 
   private void HandleGameStateChanged(GameState state)
   {
-    if (state == GameState.Playing)
+    // ポーズからの再開時以外でPlayingに移行した時はカメラをリセット
+    // （タイトル、クリア、ゲームオーバーからの開始時はリセットする）
+    if (state == GameState.Playing && previousState != GameState.Paused)
     {
       ResetCamera();
     }
+
+    previousState = state;
   }
 
   private void Update()
