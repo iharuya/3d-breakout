@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /// <summary>
 /// プレイ中にカメラをボード中心に回転させる
@@ -15,6 +16,35 @@ public class CameraController : MonoBehaviour
   [Tooltip("回転軸")]
   [SerializeField] private Vector3 rotationAxis = Vector3.up;
 
+  private Vector3 initialPosition;
+  private Quaternion initialRotation;
+
+  private void Start()
+  {
+    Assert.IsNotNull(GameManager.Instance, "GameManager.Instance が見つかりません");
+
+    initialPosition = transform.position;
+    initialRotation = transform.rotation;
+
+    GameManager.Instance.OnGameStateChanged += HandleGameStateChanged;
+  }
+
+  private void OnDestroy()
+  {
+    if (GameManager.Instance != null)
+    {
+      GameManager.Instance.OnGameStateChanged -= HandleGameStateChanged;
+    }
+  }
+
+  private void HandleGameStateChanged(GameState state)
+  {
+    if (state == GameState.Playing)
+    {
+      ResetCamera();
+    }
+  }
+
   private void Update()
   {
     if (GameManager.Instance == null || GameManager.Instance.CurrentState != GameState.Playing)
@@ -23,5 +53,10 @@ public class CameraController : MonoBehaviour
     }
 
     transform.RotateAround(pivotPoint, rotationAxis, rotationSpeed * Time.deltaTime);
+  }
+
+  private void ResetCamera()
+  {
+    transform.SetPositionAndRotation(initialPosition, initialRotation);
   }
 }
