@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
   public event Action<GameState> OnGameStateChanged;
   public event Action<int> OnScoreChanged;
   public event Action<int> OnLivesChanged;
+  public event Action OnGameInitialized;
 
   // プロパティ
   public GameState CurrentState => currentState;
@@ -105,6 +106,7 @@ public class GameManager : MonoBehaviour
     totalBlocks = blockSpawner.TotalBlockCount;
     ball.ResetBall();
 
+    OnGameInitialized?.Invoke();
     SetState(GameState.Playing);
   }
 

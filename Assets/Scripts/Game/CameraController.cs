@@ -26,22 +26,14 @@ public class CameraController : MonoBehaviour
     initialPosition = transform.position;
     initialRotation = transform.rotation;
 
-    GameManager.Instance.OnGameStateChanged += HandleGameStateChanged;
+    GameManager.Instance.OnGameInitialized += ResetCamera;
   }
 
   private void OnDestroy()
   {
     if (GameManager.Instance != null)
     {
-      GameManager.Instance.OnGameStateChanged -= HandleGameStateChanged;
-    }
-  }
-
-  private void HandleGameStateChanged(GameState state)
-  {
-    if (state == GameState.Playing)
-    {
-      ResetCamera();
+      GameManager.Instance.OnGameInitialized -= ResetCamera;
     }
   }
 
