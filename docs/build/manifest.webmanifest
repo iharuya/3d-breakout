@@ -1,0 +1,15 @@
+{
+    "name": "3d-breakout",
+    "short_name": "3d-breakout",
+    "start_url": "index.html",
+    "display": "fullscreen",
+    "background_color": "#1A1729",
+    "theme_color": "#000",
+    "description": "3Dブロック崩し",
+    "icons": [{
+      "src": "TemplateData/icons/unity-logo-dark.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }]
+  }
