@@ -17,10 +17,8 @@ public enum GameState
 /// <summary>
 /// ゲーム全体を管理するシングルトン
 /// </summary>
-public class GameManager : MonoBehaviour
+public class GameManager : SingletonMonoBehaviour<GameManager>
 {
-  public static GameManager Instance { get; private set; }
-
   [Header("設定")]
   [Tooltip("初期ライフ数")]
   [SerializeField] private int initialLives = 3;
@@ -47,18 +45,6 @@ public class GameManager : MonoBehaviour
   public GameState CurrentState => currentState;
   public int Score => score;
   public int Lives => lives;
-
-  private void Awake()
-  {
-    if (Instance == null)
-    {
-      Instance = this;
-    }
-    else
-    {
-      Destroy(gameObject);
-    }
-  }
 
   private void Start()
   {

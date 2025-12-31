@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 /// <summary>
-/// プレイ中にカメラをボード中心に回転させる
+/// カメラの親オブジェクト（CameraPivot）を回転させる
 /// </summary>
-public class CameraController : MonoBehaviour
+public class CameraRotator : MonoBehaviour
 {
   [Header("回転設定")]
   [Tooltip("1秒あたりの回転角度")]
@@ -26,14 +26,14 @@ public class CameraController : MonoBehaviour
     initialPosition = transform.position;
     initialRotation = transform.rotation;
 
-    GameManager.Instance.OnGameInitialized += ResetCamera;
+    GameManager.Instance.OnGameInitialized += ResetRotation;
   }
 
   private void OnDestroy()
   {
     if (GameManager.Instance != null)
     {
-      GameManager.Instance.OnGameInitialized -= ResetCamera;
+      GameManager.Instance.OnGameInitialized -= ResetRotation;
     }
   }
 
@@ -47,7 +47,7 @@ public class CameraController : MonoBehaviour
     transform.RotateAround(pivotPoint, rotationAxis, rotationSpeed * Time.deltaTime);
   }
 
-  private void ResetCamera()
+  private void ResetRotation()
   {
     transform.SetPositionAndRotation(initialPosition, initialRotation);
   }

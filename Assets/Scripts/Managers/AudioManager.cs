@@ -4,9 +4,8 @@ using UnityEngine.Assertions;
 /// <summary>
 /// BGMとSEの再生を管理するシングルトン
 /// </summary>
-public class AudioManager : MonoBehaviour
+public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {
-  public static AudioManager Instance { get; private set; }
 
   [Header("BGM設定")]
   [SerializeField] private AudioClip titleBGM;
@@ -31,18 +30,8 @@ public class AudioManager : MonoBehaviour
   private AudioSource bgmSource;
   private AudioSource seSource;
 
-  private void Awake()
+  protected override void OnAwakeInitialize()
   {
-    if (Instance == null)
-    {
-      Instance = this;
-    }
-    else
-    {
-      Destroy(gameObject);
-      return;
-    }
-
     bgmSource = gameObject.AddComponent<AudioSource>();
     bgmSource.loop = true;
     bgmSource.volume = bgmVolume;
@@ -61,12 +50,13 @@ public class AudioManager : MonoBehaviour
     HandleGameStateChanged(GameManager.Instance.CurrentState);
   }
 
-  private void OnDestroy()
+  protected override void OnDestroy()
   {
     if (GameManager.Instance != null)
     {
       GameManager.Instance.OnGameStateChanged -= HandleGameStateChanged;
     }
+    base.OnDestroy();
   }
 
   private void HandleGameStateChanged(GameState state)

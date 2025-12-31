@@ -9,6 +9,7 @@ public class DeadZone : MonoBehaviour
   private void Start()
   {
     Assert.IsNotNull(GameManager.Instance, "GameManager が見つかりません");
+    Assert.IsNotNull(CameraShaker.Instance, "CameraShaker が見つかりません");
   }
 
   private void OnTriggerEnter(Collider other)
@@ -17,6 +18,8 @@ public class DeadZone : MonoBehaviour
     if (other.CompareTag("Ball"))
     {
       AudioManager.Instance.PlayLoseSE();
+      Handheld.Vibrate();
+      CameraShaker.Instance.Shake();
       GameManager.Instance.LoseLife();
     }
   }
