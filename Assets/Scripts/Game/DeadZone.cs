@@ -18,7 +18,9 @@ public class DeadZone : MonoBehaviour
     if (other.CompareTag("Ball"))
     {
       AudioManager.Instance.PlayLoseSE();
+      #if UNITY_EDITOR || UNITY_IOS || UNITY_ANDROID
       Handheld.Vibrate();
+      #endif
       CameraShaker.Instance.Shake();
       GameManager.Instance.LoseLife();
     }
