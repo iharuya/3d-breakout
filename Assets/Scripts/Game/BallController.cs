@@ -125,12 +125,20 @@ public class BallController : MonoBehaviour
     // Z方向の速度を0に（2D的な動きを維持）
     velocity.z = 0f;
 
-    // Y成分が小さすぎる場合は強制的に補正（水平移動を防ぐ）
-    float minYSpeed = speed * 0.3f;
-    if (Mathf.Abs(velocity.y) < minYSpeed && velocity.magnitude > 0.1f)
+    // X/Y成分が小さすぎる場合は強制的に補正（水平・垂直移動を防ぐ）
+    float minSpeed = speed * 0.3f;
+    if (velocity.magnitude > 0.1f)
     {
-      float signY = velocity.y >= 0 ? 1f : -1f;
-      velocity.y = signY * minYSpeed;
+      if (Mathf.Abs(velocity.x) < minSpeed)
+      {
+        float signX = velocity.x >= 0 ? 1f : -1f;
+        velocity.x = signX * minSpeed;
+      }
+      if (Mathf.Abs(velocity.y) < minSpeed)
+      {
+        float signY = velocity.y >= 0 ? 1f : -1f;
+        velocity.y = signY * minSpeed;
+      }
     }
 
     // 速度が0でなければ正規化して一定速度に
