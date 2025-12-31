@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -19,6 +20,8 @@ public enum GameState
 /// </summary>
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
+  private static WaitForSeconds _waitForStateUpdate = new(0.8f);
+  
   [Header("設定")]
   [Tooltip("初期ライフ数")]
   [SerializeField] private int initialLives = 3;
@@ -157,7 +160,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     if (totalBlocks <= 0)
     {
-      SetState(GameState.Cleared);
+      StartCoroutine(DelayedSetState(GameState.Cleared));
     }
   }
 
@@ -171,11 +174,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     if (lives <= 0)
     {
-      SetState(GameState.GameOver);
+      StartCoroutine(DelayedSetState(GameState.GameOver));
     }
     else
     {
       ball.ResetBall();
     }
+  }
+
+  private IEnumerator DelayedSetState(GameState newState)
+  {
+    yield return _waitForStateUpdate;
+    SetState(newState);
   }
 }
